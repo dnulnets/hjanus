@@ -1,0 +1,4 @@
+database:
+  database: janus_test
+
+auth-dummy-login: true
