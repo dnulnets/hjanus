@@ -1,15 +1,16 @@
 
 <!-- Static navbar -->
-<nav .navbar.navbar-default.navbar-static-top.navbar-expand-md.navbar-toggleable-sm>
+<nav .navbar.navbar-static-top.navbar-expand-md.navbar-toggleable-sm.navbar-inverse.bg-inverse>
   <button type="button" .navbar-toggler.navbar-toggler-right data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
     <span .navbar-toggler-icon>
-  <a class="navbar-brand" href="#">Janus
+  <a class="navbar-brand" href="#">
+    <img src=@{StaticR images_logo_png}>
   <div #navbar .collapse.navbar-collapse>
     <ul .navbar-nav.mr-auto>
       $forall MenuItem label route _ <- navbarLeftFilteredMenuItems
         <li .nav-item :Just route == mcurrentRoute:.active>
           <a .nav-link href="@{route}">#{label}
-    <ul navbar-nav.mr-auto>
+    <ul .navbar-nav.ml-auto>
       $forall MenuItem label route _ <- navbarRightFilteredMenuItems
         <li .nav-item :Just route == mcurrentRoute:.active>
           <a .nav-link href="@{route}">#{label}

@@ -1,13 +1,15 @@
-<div .masthead>
+<div .masthead.janus_center>
     <div .container>
-        <div .row>
-            <h1 .header>
-                Janus — a software development tracker
-            <h2>
-                Track risks, user needs, requirements, verifications, validations and handles traceability, releases, versions, baselines of records and compliance with parts of IEC62304.
-                <p>
-                  <a href="https://github.com/dnulnets/janus" .btn.btn-info.btn-lg>
-                    I am on GitHub
+        <p>
+        <h1>
+            Janus — a software development tracker
+        <p>
+        <h2>
+            Track risks, user needs, requirements, verifications, validations and handles traceability, releases, versions, baselines of records and compliance with parts of IEC62304.
+            <p>
+            <p>
+              <a href="https://github.com/dnulnets/janus" .btn.btn-info.btn-lg>
+                I am on GitHub
 
 <div .container>
     <div .bs-docs-section>
