@@ -1,34 +1,12 @@
 <div .jumbotron>
     <div .container-fluid>
         <h1>
-            Janus — a software development tracker
+          Janus — a software development tracker
         <p>
-            Track risks, user needs, requirements, verifications, validations and handles traceability, releases, versions, baselines of records and compliance with parts of IEC62304.
-            <p>
-              <a href="https://github.com/dnulnets/janus" .btn.btn-info.btn-lg>
-                I am on GitHub
-
-<div .container>
-    <div .bs-docs-section>
-        <div .row>
-            <div .col>
-              <div class="card">
-                <h3 class="card-header">
-                  Introduction
-                <div class="card-block">
-                  <h4 class="card-title">
-                    The Janus Project
-                  <p class="card-text">
-                    The focus of the Janus project is to create a free and open source software development tracker that contains the bare minimum to allow it to be compliant
-                    to parts of IEC62304 but still versitile enough to allow for tailoring to a more advanced setup.
-                  <p>
-                    It is built using the
-                    <a href="https://www.haskell.org/">
-                      haskell language
-                    , the
-                    <a href="https://www.yesodweb.com/">
-                      yesod web framework
-                    and the latest
-                    <a href="http://getbootstrap.com/">
-                      bootstrap 4 theme
-                    .
+          Track risks, user needs, requirements, verifications, validations and handles traceability, releases, versions, baselines of records and compliance with parts of IEC62304.
+        <p>
+          The focus of the Janus project is to create a free and open source software development tracker that contains the bare minimum to allow it to be compliant to parts
+          of IEC62304 but still versitile enough to allow for tailoring to a more advanced setup.
+        <p>
+          <a href="https://github.com/dnulnets/janus" .btn.btn-info.btn-lg>
+            I am on GitHub

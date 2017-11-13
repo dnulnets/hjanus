@@ -15,23 +15,19 @@
         <li .nav-item :Just route == mcurrentRoute:.active>
           <a .nav-link href="@{route}">#{label}
 
-<!-- Page Contents -->
+<!-- Alert message -->
+$maybe msg <- mmsg
+  <div .container-fluid>
+    <div .row>
+      <div .col-md-12>
+        <p>
+    <div .row>
+      <div .col-md-12>
+        <div .alert.alert-info #message>#{msg}
 
-<div .container>
-    $if not $ Just HomeR == mcurrentRoute
-        <ul .breadcrumb>
-            $forall bc <- parents
-                <li>
-                    <a href="@{fst bc}">#{snd bc}
-
-            <li .active>#{title}
-
-    $maybe msg <- mmsg
-      <div .alert.alert-info #message>#{msg}
-
-
+<!-- The page, if the home page get it full width, otherwise md-12 -->
 $if (Just HomeR == mcurrentRoute)
-    ^{widget}
+      ^{widget}
 $else
     <div .container>
         <div .row>

@@ -12,6 +12,6 @@ import Import
 -- config/routes
 getHomeR :: Handler Html
 getHomeR = do
-    defaultLayout $ do
-        setTitle "Welcome To Janus!"
-        $(widgetFile "homepage")
+  defaultLayout $ do
+    setTitle "Welcome To Janus!"
+    $(widgetFile "homepage")
