@@ -14,10 +14,9 @@ import Import.NoFoundation
 import Text.Hamlet                 (hamletFile)
 import Text.Jasmine                (minifym)
 
--- Used only when in "auth-dummy-login" setting is enabled.
-import Yesod.Auth.Dummy
+import Yesod.Auth.HashDB (authHashDB)
+import Yesod.Auth.Message (AuthMessage(InvalidLogin))
 
-import Yesod.Auth.OpenId           (authOpenId, IdentifierType (Claimed))
 import Yesod.Core.Types            (Logger)
 import Yesod.Default.Util          (addStaticContentExternal)
 
@@ -195,7 +194,8 @@ instance YesodPersist App where
             (mgAccessMode $ appDatabaseConf $ appSettings master)
             action
             (appConnPool master)
-
+    
+-- The Auth instance
 instance YesodAuth App where
     type AuthId App = UserId
 
@@ -210,15 +210,9 @@ instance YesodAuth App where
         x <- getBy $ UniqueUser $ credsIdent creds
         case x of
             Just (Entity uid _) -> return $ Authenticated uid
-            Nothing -> Authenticated <$> insert User
-                { userIdent = credsIdent creds
-                , userPassword = Nothing
-                }
+            Nothing -> return $ UserError InvalidLogin
 
-    -- You can add other plugins like Google Email, email or OAuth here
-    authPlugins app = [authOpenId Claimed []] ++ extraAuthPlugins
-        -- Enable authDummy login if enabled.
-        where extraAuthPlugins = [authDummy | appAuthDummyLogin $ appSettings app]
+    authPlugins app = [authHashDB (Just . UniqueUser)]
 
     authHttpManager = getHttpManager
 

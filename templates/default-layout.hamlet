@@ -15,6 +15,14 @@
         <li .nav-item :Just route == mcurrentRoute:.active>
           <a .nav-link href="@{route}">#{label}
 
+<!-- Breadcrumbs -->
+$if not $ Just HomeR == mcurrentRoute
+  <ol .breadcrumb>
+    $forall bc <- parents
+      <li .breadcrumb-item>
+        <a href="@{fst bc}">#{snd bc}/
+    <li .breadcrum-item.active>#{title}
+
 <!-- Alert message -->
 $maybe msg <- mmsg
   <div .container-fluid>

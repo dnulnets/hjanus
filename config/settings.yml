@@ -31,5 +31,5 @@ database:
   database:    "janus"
   connections: 10
 
-copyright: Copyright 2017 Tomas Stenlund BSD-3-Clause
+copyright: Copyright 2017 Tomas Stenlund, Sundsvall, Sweden BSD-3-Clause
 #analytics: UA-YOURCODE
