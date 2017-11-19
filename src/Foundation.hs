@@ -6,6 +6,7 @@
 {-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE ExplicitForAll #-}
 {-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE FlexibleContexts #-}
 
 module Foundation where
 
@@ -14,7 +15,7 @@ import Import.NoFoundation
 import Text.Hamlet                 (hamletFile)
 import Text.Jasmine                (minifym)
 
-import Yesod.Auth.HashDB (authHashDB)
+import Yesod.Auth.HashDB (authHashDBWithForm)
 import Yesod.Auth.Message (AuthMessage(InvalidLogin))
 
 import Yesod.Core.Types            (Logger)
@@ -23,6 +24,11 @@ import Yesod.Default.Util          (addStaticContentExternal)
 import qualified Yesod.Core.Unsafe as Unsafe
 import qualified Data.CaseInsensitive as CI
 import qualified Data.Text.Encoding as TE
+
+import Model.User
+import Model.UserBase (UserRole(..))
+
+import Settings (widgetFile)
 
 -- | The foundation datatype for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -90,7 +96,7 @@ instance Yesod App where
     --   b) Validates that incoming write requests include that token in either a header or POST parameter.
     -- To add it, chain it together with the defaultMiddleware: yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
-    yesodMiddleware = defaultYesodMiddleware
+    yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
 
     defaultLayout widget = do
         master <- getYesod
@@ -194,7 +200,7 @@ instance YesodPersist App where
             (mgAccessMode $ appDatabaseConf $ appSettings master)
             action
             (appConnPool master)
-    
+
 -- The Auth instance
 instance YesodAuth App where
     type AuthId App = UserId
@@ -212,9 +218,18 @@ instance YesodAuth App where
             Just (Entity uid _) -> return $ Authenticated uid
             Nothing -> return $ UserError InvalidLogin
 
-    authPlugins app = [authHashDB (Just . UniqueUser)]
+    authPlugins app = [authHashDBWithForm loginWidget (Just . UniqueUser)]
 
     authHttpManager = getHttpManager
+
+-- This is a handler function for the GET request method on the HomeR
+-- resource pattern. All of your resource patterns are defined in
+-- config/routes
+loginWidget :: Yesod App => Route App -> Widget
+loginWidget action = do
+  request <- getRequest
+  let mtok = reqToken request  
+  $(widgetFile ("login"))
 
 -- | Access function to determine if a user is logged in.
 isAuthenticated :: Handler AuthResult

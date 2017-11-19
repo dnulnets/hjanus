@@ -1,5 +1,8 @@
 User
     name Text
     password Text Maybe
+    realName Text
+    email Text
+    role UserRole
     UniqueUser name
     deriving Typeable
